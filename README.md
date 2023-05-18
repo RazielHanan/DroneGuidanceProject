@@ -48,6 +48,17 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 
 > #### Navigation and Guidance Modules:
 
-* **Path.py** - 
+* **Path.py** - includes 'get_best_angle' function.
 
+inputs - user position, destination position, obstacles positions and velocities.
+
+functionality - here we will calculate the optimal angle to the next step only.
+
+* **FullPath.py** -includes 'get_full_path' function.
+
+inputs - user position, destination position, obstacles positions and velocities.
+
+functionality - here we will call 'get_best_angle' by iterations. every iteration we will change the starting position of the user 1 step to the best angle from the last iteration (starting from the real position and end in the destination position). in this way we will get a complete path from the current user position to the destination.
+
+> #### Drone Control Loop for tracking the user:
 
