@@ -23,7 +23,7 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 * takeoff: press 'p' until you get the desired height (8-10 meters).
 * press 'l' to start the system.
 * land the drone and close the programs and video: press 'q'.
-### optional:
+> ### optional:
 * you can press anytime 'r' key to stop the drone and end the tracking after objects.
 
 # (3) Modules:
