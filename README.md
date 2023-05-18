@@ -40,6 +40,8 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 
 * **ObstaclesDetector.py** - includes 'detect_obstacles' function. Responsible for the module that deals with tracking the obstacles in the frames received from the drone.
 
+in any of those modules, there are automatic prints of the tracking performance and positions of objects to log files.
+
 > #### **velocity estimination and predition**
 
 >> [2] then, we want to get information about this objects:
@@ -62,7 +64,7 @@ functionality - here we will calculate the optimal angle to the next step only.
 
 inputs - user position, destination position, obstacles positions and velocities.
 
-functionality - here we will call 'get_best_angle' by iterations. every iteration we will change the starting position of the user 1 step to the best angle from the last iteration (starting from the real position and end in the destination position). in this way we will get a complete path from the current user position to the destination.
+functionality - here we will call 'get_best_angle' by iterations. every iteration we will change the starting position of the user 1 step to the best angle from the last iteration (starting from the real position and end in the destination position). in this way we will get a complete path from the current user position to the destination. in order to check the performances of the algorithm, we will write the calculation time of each iteration to log file.
 
 > #### Drone Control Loop for tracking the user:
 
