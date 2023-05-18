@@ -28,6 +28,26 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 
 # (3) Modules:
 
+* **Project_V1.1.py** - the Main script. unite the different modules and call them by specific order.
 
+> #### Detection and Tracking Modules:
+
+>> [1] first of all, after receiving each new frame from the drone we will want to detect the objects in the image:
+
+* **UserRecognition.py** - includes 'detect_user' function. Responsible for the module that deals with tracking the user in the frames received from the drone.
+
+* **DestinationRecognition.py** - includes 'detect_target' function. Responsible for the module that deals with tracking the Destination in the frames received from the drone.
+
+* **ObstaclesDetector.py** - includes 'detect_obstacles' function. Responsible for the module that deals with tracking the obstacles in the frames received from the drone.
+
+> #### velocity estimination and predition
+
+>> [2] then, we want to get information about this objects:
+
+* **ObstacleState.py** - here we define class that describes the User/Destination/Obstacle. after declaring a variable of this class we should add the new positions of the object we tracking every time we detecting it on new frame. this class will automatically calculate the velocity of the object and it will be available at self.vx and self.vy attributes for both axises. in addition, this class automatically calculates the future positions of the object in the next 3 seconds by assuming a constant speed.
+
+> #### Navigation and Guidance Modules:
+
+* **Path.py** - 
 
 
