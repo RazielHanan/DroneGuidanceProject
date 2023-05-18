@@ -30,7 +30,7 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 
 * **Project_V1.1.py** - the Main script. unite the different modules and call them by specific order.
 
-> #### Detection and Tracking Modules:
+> #### **Detection and Tracking Modules:**
 
 >> [1] first of all, after receiving each new frame from the drone we will want to detect the objects in the image:
 
@@ -40,13 +40,17 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 
 * **ObstaclesDetector.py** - includes 'detect_obstacles' function. Responsible for the module that deals with tracking the obstacles in the frames received from the drone.
 
-> #### velocity estimination and predition
+> #### **velocity estimination and predition**
 
 >> [2] then, we want to get information about this objects:
 
-* **ObstacleState.py** - here we define class that describes the User/Destination/Obstacle. after declaring a variable of this class we should add the new positions of the object we tracking every time we detecting it on new frame. this class will automatically calculate the velocity of the object and it will be available at self.vx and self.vy attributes for both axises. in addition, this class automatically calculates the future positions of the object in the next 3 seconds by assuming a constant speed.
+* **velocity_estimination.py** - gets positions history and match linear function to those positions. we assuming a constant velocity so the slope is the velocity of the object.
 
-> #### Navigation and Guidance Modules:
+* **ObstacleState.py** - here we define class that describes the User/Destination/Obstacle. after declaring a variable of this class we should add the new positions of the object we tracking every time we detecting it on new frame. this class will automatically calculate the velocity of the object and it will be available at self.vx and self.vy attributes for both axises. in addition, this class automatically calculates the future positions of the object in the next 3 seconds by assuming a constant velocity.
+
+> #### **Navigation and Guidance Modules:**
+
+>> [3] Now we have the necessary information to calculate appropriate path from the user to the destination:
 
 * **Path.py** - includes 'get_best_angle' function.
 
@@ -61,4 +65,16 @@ inputs - user position, destination position, obstacles positions and velocities
 functionality - here we will call 'get_best_angle' by iterations. every iteration we will change the starting position of the user 1 step to the best angle from the last iteration (starting from the real position and end in the destination position). in this way we will get a complete path from the current user position to the destination.
 
 > #### Drone Control Loop for tracking the user:
+
+>> [4] Also, we want the drone to follow the user, we will do it by using the position and velocity of the user:
+
+* **velocity_controller.py** - includes 'velocity_cmd' attribute of the Controller class which calculates the desired velocity of the drone in order to follow the user using PD controller.
+
+* **UserTracker.py** - here we calculate the error between the current position and the desired position of the user. send the velocity command to the drone after calling 'velocity_cmd' attribute and print the command to log file (for easier debug).
+
+> #### saving the frames we recieve from the drone:
+
+* **defines.py** - define constants for saving the frames in specific directory.
+
+* **write.py** - class for comfortable saving images in the main loop.
 
