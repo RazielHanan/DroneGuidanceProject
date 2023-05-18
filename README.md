@@ -3,9 +3,12 @@ The purpose of this project is to guide a person on his way to a predetermined d
 
 link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/latest/tello/
 
-(1) SETUP:
+# (1) SETUP:
 
 * clone the repository:
 
-git clone https://github.com/RazielHanan/DroneGuidanceProject/edit/main/README.md
+`git clone https://github.com/RazielHanan/DroneGuidanceProject/edit/main/README.md`
+
+
+
 
