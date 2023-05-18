@@ -17,7 +17,7 @@ The purpose of this project is to guide a person on his way to a predetermined d
 
 link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/latest/tello/
 
-## How to start the system:
+# (2) How to start the system:
 * locate your drone in a open space. 
 * run 'Project_V1.1.py' module.
 * takeoff: press 'p' until you get the desired height (8-10 meters).
@@ -26,7 +26,7 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 ### optional:
 * you can press anytime 'r' key to stop the drone and end the tracking after objects.
 
-# (2) Modules:
+# (3) Modules:
 
 
 
