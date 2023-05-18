@@ -7,7 +7,11 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 
 * clone the repository:
 
-`git clone https://github.com/RazielHanan/DroneGuidanceProject/edit/main/README.md`
+`git clone https://github.com/RazielHanan/DroneGuidanceProject`
+
+* install OpenCV:
+
+`pip install opencv-python`
 
 
 
