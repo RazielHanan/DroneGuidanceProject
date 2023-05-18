@@ -80,3 +80,20 @@ functionality - here we will call 'get_best_angle' by iterations. every iteratio
 
 * **write.py** - class for comfortable saving images in the main loop.
 
+# (4) Products:
+
+* **5 videos of the system operation in different environmental conditions** - 
+
+**vid_res_1.mp4** - A single obstacle, the system offers a possible path at each stage. Even when the user does not follow the suggested path, the system corrects the route at each step.
+
+**vid_res_2.mp4** - 3 obstacles cross the suggested path back and forth between the user and the destination. The system deals with these disturbances using velocity and position estimators.
+
+**vid_res_3.mp4** - Several obstacles that interfere with the path, a circular movement of the obstacles to disrupt the velocity estimators and prediction values. Dealing with changing the destination location (the system must regularly update the path to avoid obstacles).
+
+**vid_res_4.mp4** - Illustrate a random scenario, with many obstacles, with no set pattern.
+
+**vid_res_5.mp4** - Illustrating a possible scenario where the destination position changing, the system must respond in real time.
+
+Each of these product videos has documentation files as described in the explanation of the various modules.
+
+
