@@ -84,6 +84,8 @@ functionality - here we will call 'get_best_angle' by iterations. every iteratio
 
 * **5 videos of the system operation in different environmental conditions** - 
 
+limk to Google Drive with the videos - https://drive.google.com/drive/folders/1DrBqHkqisXKfT6CVTljfCKJ61MzeInZ8?usp=sharing
+
 **vid_res_1.mp4** - A single obstacle, the system offers a possible path at each stage. Even when the user does not follow the suggested path, the system corrects the route at each step.
 
 **vid_res_2.mp4** - 3 obstacles cross the suggested path back and forth between the user and the destination. The system deals with these disturbances using velocity and position estimators.
