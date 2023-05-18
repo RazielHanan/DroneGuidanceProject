@@ -76,6 +76,8 @@ functionality - here we will call 'get_best_angle' by iterations. every iteratio
 
 > #### saving the frames we recieve from the drone:
 
+>> [5] We want to save the frames we recieve from the dron for debug issues and improvements.
+
 * **defines.py** - define constants for saving the frames in specific directory.
 
 * **write.py** - class for comfortable saving images in the main loop.
