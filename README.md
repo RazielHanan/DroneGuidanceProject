@@ -1,7 +1,13 @@
 # DroneGuidanceProject
-The purpose of this project is to guide a person on his way to a predetermined destination using a drone without colliding with obstacles. Here you can find all the modules of the system. in this project we used the DJI Tello Drone. but the DJITelloPy will work on any of their Drones since we used the 2.0V SDK.
+The purpose of this project is to guide a person on his way to a predetermined destination using a drone without colliding with obstacles. In this project we used the DJI Tello Drone, but the DJITelloPy (the library used to implement our design) will work on any of the DJI Drones since we used the 2.0V SDK.
+Here you can find all the modules of the system.
 
 # (1) SETUP:
+* open terminal
+
+* install git:
+
+pip install python-git
 
 * clone the repository:
 
@@ -15,24 +21,24 @@ The purpose of this project is to guide a person on his way to a predetermined d
 
 `pip install djitellopy`
 
-link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/latest/tello/
+link to DJITelloPy functions: https://djitellopy.readthedocs.io/en/latest/tello/
 
 # (2) How to start the system:
-* locate your drone in a open space. 
+* locate your drone in an open space. 
 * run 'Project_V1.1.py' module.
 * takeoff: press 'p' until you get the desired height (8-10 meters).
 * press 'l' to start the system.
-* land the drone and close the programs and video: press 'q'.
+* press 'q' land the drone and close the programs and video.
 > ### optional:
-* you can press anytime 'r' key to stop the drone and end the tracking after objects.
+* you can press the 'r' key anytime to stop the drone and end the tracking after objects.
 
 # (3) Modules:
 
-* **Project_V1.1.py** - the Main script. unite the different modules and call them by specific order.
+* **Project_V1.1.py** - the Main script. Unites the different modules and call them by specific order.
 
 > #### **Detection and Tracking Modules:**
 
->> [1] first of all, after receiving each new frame from the drone we will want to detect the objects in the image:
+>> [1] first of all, after receiving each new frame from the drone we will want to detect the objects in the image (the user, destination and obstacles):
 
 * **UserRecognition.py** - includes 'detect_user' function. Responsible for the module that deals with tracking the user in the frames received from the drone.
 
@@ -40,51 +46,49 @@ link to DJITelloPy possible functions: https://djitellopy.readthedocs.io/en/late
 
 * **ObstaclesDetector.py** - includes 'detect_obstacles' function. Responsible for the module that deals with tracking the obstacles in the frames received from the drone.
 
-in any of those modules, there are automatic prints of the tracking performance and positions of objects to log files.
+In all of those modules, there are automatic data prints of the tracking performance and positions of objects to the log files.
 
-> #### **velocity estimination and predition**
+> #### **Velocity Estimation and Prediction Modules**
 
->> [2] then, we want to get information about this objects:
+>> [2] then, we want to get information about these objects:
 
-* **velocity_estimination.py** - gets positions history and match linear function to those positions. we assuming a constant velocity so the slope is the velocity of the object.
+* **velocity_estimation.py** - gets the positional history of objects and matches a linear function to those positions. we assume a constant velocity so the slope of said linear function is our estimated velocity of the object.
 
-* **ObstacleState.py** - here we define class that describes the User/Destination/Obstacle. after declaring a variable of this class we should add the new positions of the object we tracking every time we detecting it on new frame. this class will automatically calculate the velocity of the object and it will be available at self.vx and self.vy attributes for both axises. in addition, this class automatically calculates the future positions of the object in the next 3 seconds by assuming a constant velocity.
+* **ObstacleState.py** - here we define a class that describes the User/Destination/Obstacles. after declaring an instance of this class we will add the new positions of the object we are tracking every time we detect it in a new frame. this class will automatically calculate the velocity of the object and it will be available at self.vx and self.vy attributes for both axises. in addition, this class automatically estimates the future positions of the object in the next 3 seconds by assuming a constant velocity.
 
 > #### **Navigation and Guidance Modules:**
 
->> [3] Now we have the necessary information to calculate appropriate path from the user to the destination:
+>> [3] now we have the necessary information to calculate an appropriate path from the user to the destination:
 
 * **Path.py** - includes 'get_best_angle' function.
 
 inputs - user position, destination position, obstacles positions and velocities.
 
-functionality - here we will calculate the optimal angle to the next step only.
+functionality - here we will calculate the optimal angle for the next step (in the path) only.
 
 * **FullPath.py** -includes 'get_full_path' function.
 
 inputs - user position, destination position, obstacles positions and velocities.
 
-functionality - here we will call 'get_best_angle' by iterations. every iteration we will change the starting position of the user 1 step to the best angle from the last iteration (starting from the real position and end in the destination position). in this way we will get a complete path from the current user position to the destination. in order to check the performances of the algorithm, we will write the calculation time of each iteration to log file.
+functionality - here we will call 'get_best_angle' by iterations. every iteration we will change the starting position of the user 1 step towards the best angle from the last iteration (starting from the user’s current position and ending in the destination’s position). in this way we will get a complete path from the user’s current position to the destination. in order to check the performances of the algorithm, we will print the calculation time of each iteration to the log file.
 
-> #### Drone Control Loop for tracking the user:
+> #### **Drone Control Loop Modules:**
 
->> [4] Also, we want the drone to follow the user, we will do it by using the position and velocity of the user:
+>> [4] Also, we want the drone to follow the user, in order to keep it in it’s field of view. We implement this by closing a velocity control loop between the drone and the user (which will also close the positional error). It will be using the user’s velocity and position:
 
 * **velocity_controller.py** - includes 'velocity_cmd' attribute of the Controller class which calculates the desired velocity of the drone in order to follow the user using PD controller.
 
-* **UserTracker.py** - here we calculate the error between the current position and the desired position of the user. send the velocity command to the drone after calling 'velocity_cmd' attribute and print the command to log file (for easier debug).
+* **UserTracker.py** - here we calculate the error between the current position and the desired position of the user in comparison to the drone. we then send the appropriate velocity command to the drone after calling 'velocity_cmd' attribute and printing the command to the log file for debugging purposes.
 
-> #### saving the frames we recieve from the drone:
+> #### **saving the frames we recieve from the drone:**
 
->> [5] We want to save the frames we recieve from the dron for debug issues and improvements.
+* **defines.py** - define constants in order to save the frames in a specific directory.
 
-* **defines.py** - define constants for saving the frames in specific directory.
-
-* **write.py** - class for comfortable saving images in the main loop.
+* **write.py** - class for comfortable image saving in the main loop.
 
 # (4) Products:
 
-* **5 videos of the system operation in different environmental conditions** - 
+* **5 videos of the system’s operation in different environmental conditions** - 
 
 link to Google Drive with the videos - https://drive.google.com/drive/folders/1DrBqHkqisXKfT6CVTljfCKJ61MzeInZ8?usp=sharing
 
@@ -94,9 +98,9 @@ link to Google Drive with the videos - https://drive.google.com/drive/folders/1D
 
 **vid_res_3.mp4** - Several obstacles that interfere with the path, a circular movement of the obstacles to disrupt the velocity estimators and prediction values. Dealing with changing the destination location (the system must regularly update the path to avoid obstacles).
 
-**vid_res_4.mp4** - Illustrate a random scenario, with many obstacles, with no set pattern.
+**vid_res_4.mp4** - The system deals with a random scenario - many obstacles, with no set pattern.
 
-**vid_res_5.mp4** - Illustrating a possible scenario where the destination position changing, the system must respond in real time.
+**vid_res_5.mp4** - Illustrates a possible scenario where the destination’s position changes, the system must respond in real time.
 
 Each of these product videos has documentation files as described in the explanation of the various modules.
 
