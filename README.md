@@ -1,5 +1,5 @@
 # DroneGuidanceProject
-The purpose of this project is to guide a person on his way to a predetermined destination using a drone without colliding with obstacles. In this project we used the DJI Tello Drone, but the DJITelloPy (the library used to implement our design) will work on any of the DJI Drones since we used the 2.0V SDK.
+The purpose of this project is to guide a person on their way to a predetermined destination using a drone without colliding with obstacles. In this project we used the DJI Tello Drone, but the DJITelloPy (the library used to implement our design) will work on any of the DJI Drones since we used the 2.0V SDK.
 Here you can find all the modules of the system.
 
 # (1) SETUP:
