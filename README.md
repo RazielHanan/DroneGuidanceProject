@@ -7,7 +7,7 @@ Here you can find all the modules of the system.
 
 * install git:
 
-pip install python-git
+`pip install python-git`
 
 * clone the repository:
 
